@@ -31,8 +31,31 @@ export function queryStringify(data: Record<string, unknown>) {
 export class HTTPTransport {
   private _url: string
 
+  private _mockRes: any = null
+
   constructor(url: string) {
     this._url = url
+  }
+
+  mockResolve(resp: any) {
+    this._mockRes = resp
+  }
+
+  _getmockResolve() {
+    return this._mockRes
+  }
+
+  mockResolveEnd() {
+    this._mockRes = null
+  }
+
+  request(url: string, options: Record<string, any>, timeout = 5000) {
+    if (this._mockRes !== null) {
+      return new Promise((res, rej) => {
+        res({ status: 200, response: JSON.stringify(this._mockRes) })
+      })
+    }
+    return this._request(url, options, timeout)
   }
 
   test = (url: string, options: OptionsType) => {
@@ -55,7 +78,7 @@ export class HTTPTransport {
     return this.request(this._url + url, { ...options, method: METHODS.DELETE }, options?.timeout)
   }
 
-  request = (url: string, options: Record<string, any>, timeout = 5000) => {
+  _request = (url: string, options: Record<string, any>, timeout = 5000) => {
     let { headers, method, data, isFormData } = options
 
     return new Promise(function (resolve, reject) {

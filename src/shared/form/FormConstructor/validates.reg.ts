@@ -47,7 +47,7 @@ export const ValidatesForm = {
   password: getvalidateFunc(
     RegPassword,
     `Пароль должен содержать: cтрочные и прописные латинские буквы, 
-      цифры, спецсимволы.`
+      цифры, спецсимволы. Минимум 8 символов`
   ),
   email: getvalidateFunc(RegExp(RegEmail), 'Не корректный email'),
   phone: getvalidateFunc(RegExp(RegPhone), 'Не корректный номер телефона. Пример: 8(999)900-90-90'),

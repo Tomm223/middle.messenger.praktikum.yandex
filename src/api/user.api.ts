@@ -5,6 +5,12 @@ import { getBoolOfStatusCode } from './helpers/getBoolOfStatusCode'
 const UserHTTP = HTTP('/user')
 
 export class UserAPI {
+  constructor(mockResolve?: unknown) {
+    if (mockResolve) {
+      UserHTTP.mockResolve(mockResolve)
+    }
+  }
+
   getUserById(id: number): Promise<UserType> {
     return UserHTTP.get(`/${id}`).then((resp) => JSON.parse(resp.response))
   }

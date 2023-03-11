@@ -31,7 +31,6 @@ export default class ChatsListItem extends Component<ChatListItem> {
     const content = this.props.chat.last_message
       ? this.props.chat.last_message.content
       : 'Нет сообщений'
-
     const rightSide = this.props.chat.last_message ? (
       <div class={styles.right}>
         <div class={styles.time}>
@@ -44,6 +43,7 @@ export default class ChatsListItem extends Component<ChatListItem> {
     ) : (
       <div></div>
     )
+
     const isActive = this.props.chatID_selected === this.props.chat.id
 
     return (

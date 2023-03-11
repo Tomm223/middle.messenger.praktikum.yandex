@@ -23,8 +23,9 @@ export default class MessageScreen extends Component<MessageScreenType> {
 
   dropDown() {
     if (!this._element?.getElementsByTagName('li').length) return
+    const collection = this._element?.getElementsByTagName('li')
+    let lastItem = collection.item(collection.length - 1) as HTMLLIElement
 
-    let lastItem = [...this._element?.getElementsByTagName('li')].pop() as HTMLLIElement
     lastItem.scrollIntoView()
   }
 

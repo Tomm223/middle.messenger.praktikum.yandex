@@ -3,6 +3,14 @@ import Actions from '@/store/Actions'
 import { SetPasswordRequest, UserType } from '@/types/user'
 
 export class UserController {
+  private _mockResolve: unknown
+
+  constructor(mockResolve?: unknown) {
+    if (mockResolve) {
+      this._mockResolve = mockResolve
+    }
+  }
+
   public async getUserById(id: number) {
     const api = new UserAPI()
     const userData = await api.getUserById(id)
@@ -12,7 +20,7 @@ export class UserController {
 
   public async setProfile(user: UserType): Promise<boolean> {
     try {
-      const api = new UserAPI()
+      const api = new UserAPI(this._mockResolve)
       const userData = await api.setProfile(user)
       if (!userData) {
         throw new Error('error response')
@@ -28,7 +36,7 @@ export class UserController {
 
   public async setAvatar(data: FormData): Promise<boolean> {
     try {
-      const api = new UserAPI()
+      const api = new UserAPI(this._mockResolve)
       const userData = await api.setAvatar(data)
 
       if (!userData) {
@@ -44,7 +52,7 @@ export class UserController {
 
   public async setPassword(user: SetPasswordRequest): Promise<boolean> {
     try {
-      const api = new UserAPI()
+      const api = new UserAPI(this._mockResolve)
       const status = await api.setPassword(user)
 
       if (!status) {

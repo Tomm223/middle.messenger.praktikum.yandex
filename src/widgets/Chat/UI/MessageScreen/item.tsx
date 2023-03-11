@@ -2,7 +2,6 @@ import CompileMaster from '@/core/CompileJSX'
 import { Message } from '@/types/chats'
 import styles from './styles.module.scss'
 import MessageText from '@/shared/messages/MessageText'
-import MessageImage from '@/shared/messages/MessageImage'
 import Component from '@/core/Component'
 import Actions from '@/store/Actions'
 

@@ -11,15 +11,12 @@ import RemoveUser from '@/entities/modals/RemoveUser'
 import Component from '@/core/Component'
 import MenuChat from './UI/MenuChat'
 import ButtonMenu from './UI/MenuChat/ButtonMenu'
-import { EventBus } from '@/core/EventBus'
 import { ChatEventBus, CHATEVENTS } from './eventbus'
 import { ChatWebSocketService } from '@/service/chat.ws.service'
 import Actions from '@/store/Actions'
 import { ChatsController } from '@/service/chats.service'
-import Store from '@/store/Store'
 import { Message } from '@/types/chats'
 import ModalFormDefault from '@/shared/modals/ModalFormDefault'
-import InputText from '@/shared/inputs/InputText'
 
 interface ChatType {
   header?: Component
@@ -32,7 +29,6 @@ interface ChatType {
     avatar: string | null
     chatID: number | null
     token: string | null
-    loading: boolean
   }
 }
 
@@ -81,7 +77,7 @@ export default class Chat extends Component<ChatType> {
       buttonName: 'Удалить',
       size: { width: '340px', height: '260px' },
       isOpen: false,
-      onSubmit: async (form) => {
+      onSubmit: async () => {
         const chatID = Actions.getChatID()
 
         if (typeof chatID !== 'number') return false
@@ -126,9 +122,7 @@ export default class Chat extends Component<ChatType> {
     })
   }
 
-  protected registerEvents(
-    eventBus: EventBus<Record<string, string>, Record<string, any[]>>
-  ): void {
+  protected registerEvents(): void {
     ChatEventBus.on(CHATEVENTS.ADDUSER, this.handleAddUser.bind(this))
     ChatEventBus.on(CHATEVENTS.REMOVEUSER, this.handleRemoveUser.bind(this))
     ChatEventBus.on(CHATEVENTS.REMOVECHAT, this.handleRemoveChat.bind(this))
@@ -160,7 +154,6 @@ export default class Chat extends Component<ChatType> {
   }
 
   handleWSMessages(e: MessageEvent<any>) {
-    const store = new Store()
     const msg = JSON.parse(e.data) as Message[] | Message
 
     if (Array.isArray(msg)) {
@@ -180,7 +173,7 @@ export default class Chat extends Component<ChatType> {
 
   createSocket() {
     if (!this.props.chat) return
-    const { loading, chatID, token } = this.props.chat
+    const { chatID, token } = this.props.chat
     const userID = Actions.getUser()?.id
 
     if (!chatID) return

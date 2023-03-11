@@ -3,6 +3,16 @@ import Actions from '@/store/Actions'
 import { GetChatsRequest } from '@/types/chats'
 
 export class ChatsController {
+  private _mockResolve: unknown
+
+  constructor(mockResolve?: unknown) {
+    if (mockResolve) {
+      this._mockResolve = mockResolve
+    } else {
+      this._mockResolve = null
+    }
+  }
+
   public async addUser(param: { chatID: number; userID: number }) {
     try {
       const api = new ChatAPI()
@@ -35,7 +45,7 @@ export class ChatsController {
 
   public async getChatToken(id: number) {
     try {
-      const api = new ChatAPI()
+      const api = new ChatAPI(this._mockResolve)
       const token = await api.getChatToken(id)
 
       if (!token) {
@@ -49,13 +59,17 @@ export class ChatsController {
 
   public async createChat(title: string) {
     try {
-      const api = new ChatAPI()
+      const api = new ChatAPI(this._mockResolve)
       const status = await api.createChat(title)
       if (!status) {
         alert('Вы не можете удалять этот чат')
         return status
       }
-      Actions.setNewChatList()
+      // Actions.setNewChatList()
+      const limit = Actions.getChatListLimit()
+      const offset = Actions.getChatListOffset()
+      const search = Actions.getChatListSearch()
+      await this.getNewChatList({ limit, offset, title: search })
       alert(`Вы создали чат "${title}"`)
       return status
     } catch {
@@ -65,26 +79,31 @@ export class ChatsController {
 
   public async removeChat(id: number) {
     try {
-      const api = new ChatAPI()
+      const api = new ChatAPI(this._mockResolve)
       const status = await api.removeChat(id)
+
       if (typeof status === 'boolean') {
         alert('Вы не можете удалять этот чат')
         return status
       }
 
-      Actions.setNewChatList()
+      const limit = Actions.getChatListLimit()
+      const offset = Actions.getChatListOffset()
+      const search = Actions.getChatListSearch()
+      await this.getNewChatList({ limit, offset, title: search })
+
       Actions.resetChat()
       alert(`Вы удалили чат ${status.result.title}`)
       return true
     } catch {
-      alert('Error CreateChat Fronted Service')
+      alert('Error RemoveChat Fronted Service')
     }
   }
 
   public async pushNewChats(data: GetChatsRequest) {
     try {
       Actions.startChatListLoading()
-      const api = new ChatAPI()
+      const api = new ChatAPI(this._mockResolve)
       const list = await api.getChats(data)
       if (list.length) {
         Actions.pushChatList(list)
@@ -99,7 +118,7 @@ export class ChatsController {
   public async getNewChatList(data: GetChatsRequest) {
     try {
       Actions.startChatListLoading()
-      const api = new ChatAPI()
+      const api = new ChatAPI(this._mockResolve)
       const list = await api.getChats(data)
 
       Actions.setChatList(list)

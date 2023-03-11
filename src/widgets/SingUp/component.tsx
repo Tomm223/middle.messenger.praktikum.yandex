@@ -1,11 +1,11 @@
-import CompileMaster from '../../core/CompileJSX'
+import CompileMaster from '@/core/CompileJSX'
 import InputText from '@/shared/inputs/InputText'
 import ButtonConstructor from '@/shared/buttons/ButtonConstructor'
 import ModalDefault from '@/shared/modals/ModalDefault'
-import { StateSingUp, ValidateSingUp } from './constants'
+import { ValidateSingUp } from './constants'
 import Component from '@/core/Component'
 import FormConstructorTitle from '@/shared/form/FormConstructorTitle'
-import Router from 'src/app/router'
+import Router from '@/app/router'
 import { SingUpRequest } from '@/types/user'
 import LoaderFullPage from '@/shared/Loaders/LoaderFullPage'
 
@@ -16,6 +16,7 @@ interface SingUpType {
   loading?: boolean
   error?: string
 }
+
 interface Form {
   email: string
   login: string

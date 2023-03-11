@@ -9,9 +9,6 @@
 .input::-moz-placeholder {
   color: #999;
 }
-.input:-ms-input-placeholder {
-  color: #999;
-}
 .input::placeholder {
   color: #999;
 }/*# sourceMappingURL=styles.module.css.map */

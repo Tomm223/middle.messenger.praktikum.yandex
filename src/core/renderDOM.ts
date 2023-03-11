@@ -5,6 +5,7 @@ export function renderDOM(query: string, block: Component) {
   // root.innerHTML = ''
   // Можно завязаться на реализации вашего класса Block
   const template = block.getContent() as HTMLElement
+
   root.appendChild(template)
 
   block.dispatchComponentDidMount()

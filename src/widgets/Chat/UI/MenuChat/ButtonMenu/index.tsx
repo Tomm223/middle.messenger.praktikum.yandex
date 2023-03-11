@@ -1,7 +1,6 @@
 import CompileMaster from '@/core/CompileJSX'
 import Component from '@/core/Component'
 import { EventBus } from '@/core/EventBus'
-import InputFile, { AcceptInputChoose } from '@/shared/inputs/InputFile'
 import { ButtonMenuBus, ButtonMenuEVENTS } from './eventbus'
 import styles from './styles.module.scss'
 

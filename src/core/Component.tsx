@@ -2,9 +2,6 @@ import { EventBus } from './EventBus'
 import { v4 as uuidv4 } from 'uuid'
 import CompileMaster from '@/core/CompileJSX'
 import { deepEqual } from './deepEqual'
-import { EVENTS } from '@/shared/inputs/InputText/eventbus'
-
-type Handler = (e: MouseEvent) => void
 
 class Component<P extends Record<string, any> = any> {
   static EVENTS = {

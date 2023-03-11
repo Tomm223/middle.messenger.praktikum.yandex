@@ -5,13 +5,17 @@ import { getBoolOfStatusCode } from './helpers/getBoolOfStatusCode'
 const AuthHTTP = HTTP('/auth')
 
 export class SingAPI {
+  constructor(mockResolve?: unknown) {
+    if (mockResolve) {
+      AuthHTTP.mockResolve(mockResolve)
+    }
+  }
+
   singin(data: SingInRequest): Promise<boolean> {
     return AuthHTTP.post('/signin', { data }).then((resp) => getBoolOfStatusCode(resp.status))
   }
 
   singup(data: SingUpRequest): Promise<number> {
-    console.log(data)
-
     return AuthHTTP.post('/signup', { data }).then((resp) => resp)
   }
 

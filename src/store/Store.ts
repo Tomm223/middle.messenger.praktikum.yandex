@@ -31,7 +31,7 @@ export interface InitialStateType {
   isAuth: boolean
 }
 
-const Initialstate: InitialStateType = {
+const ___InitialStore: InitialStateType = {
   listChats: {
     isAll: false,
     limit: 10,
@@ -68,6 +68,8 @@ const Initialstate: InitialStateType = {
   isAuth: false,
 }
 
+export const InitialStore = Object.freeze(___InitialStore)
+
 export default class Store extends EventBus {
   static EVENT_UPDATE = '1'
 
@@ -84,15 +86,16 @@ export default class Store extends EventBus {
 
     // localStorage.removeItem(Store.STORE_NAME)
     const savedState = localStorage.getItem(Store.STORE_NAME)
+    const init = { ...InitialStore }
     // console.log('saves_state', savedState)
-    this._state = savedState ? JSON.parse(savedState) ?? Initialstate : Initialstate
+    this._state = savedState ? JSON.parse(savedState) ?? init : init
     // this._state = Initialstate
 
     Store._instance = this
 
     this.on(Store.EVENT_UPDATE, () => {
       const saveState: InitialStateType = {
-        ...Initialstate,
+        ...InitialStore,
         isAuth: false,
         user: {
           id: 0,
@@ -113,6 +116,7 @@ export default class Store extends EventBus {
           messages: [],
         },
       }
+
       localStorage.setItem(Store.STORE_NAME, JSON.stringify(saveState))
     })
   }
@@ -122,7 +126,7 @@ export default class Store extends EventBus {
   }
 
   removeState() {
-    this._state = Initialstate
+    this._state = { ...InitialStore }
     this.emit(Store.EVENT_UPDATE)
   }
 

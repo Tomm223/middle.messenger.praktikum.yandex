@@ -1,7 +1,5 @@
 import CompileMaster from '@/core/CompileJSX'
 import Component from '@/core/Component'
-import { deepEqual } from '@/core/deepEqual'
-import { EventBus } from '@/core/EventBus'
 import { InputProfileEventBus, InputProfileEVENTS } from './eventbus'
 import styles from './styles.module.scss'
 
@@ -25,9 +23,7 @@ export default class InputProfile extends Component<InputProfileType> {
     this.setProps({ text: value })
   }
 
-  protected registerEvents(
-    eventBus: EventBus<Record<string, string>, Record<string, any[]>>
-  ): void {
+  protected registerEvents(): void {
     InputProfileEventBus.on(InputProfileEVENTS.CHANGE(this.id), this.intercaptorChange.bind(this))
   }
 

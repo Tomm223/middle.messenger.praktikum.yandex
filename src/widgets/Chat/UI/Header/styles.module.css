@@ -22,15 +22,6 @@
   justify-content: center;
 }
 
-@-webkit-keyframes menu {
-  from {
-    transform: translate(0%, -300%);
-  }
-  to {
-    transform: translate(0%, 100%);
-  }
-}
-
 @keyframes menu {
   from {
     transform: translate(0%, -300%);
@@ -42,21 +33,17 @@
 .menu,
 .menu_active {
   z-index: 2000;
-  position: absolute;
 }
 
 .menu_active {
   transform: translate(0%, 100%);
+  position: absolute;
+  right: 10px;
   bottom: -10px;
-  right: -10px;
-  -webkit-animation-name: menu;
-          animation-name: menu;
-  -webkit-animation-iteration-count: 1;
-          animation-iteration-count: 1;
-  -webkit-animation-duration: 200ms, 500ms;
-          animation-duration: 200ms, 500ms;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+  animation-name: menu;
+  animation-iteration-count: 1;
+  animation-duration: 200ms, 500ms;
+  animation-fill-mode: forwards;
 }
 
 .menu {

@@ -7,7 +7,7 @@ repos:
         files: ^src/
         types_or: [javascript, jsx, ts, tsx, css]
   - repo: https://github.com/thibaudcolas/pre-commit-stylelint
-    rev: v14.4.0
+    rev: v14.16.1
     hooks:
       - id: stylelint
         files: ^src/
@@ -25,8 +25,9 @@ repos:
         files: \.[jt]sx?$
         types: [file]
         additional_dependencies:
-          - eslint@8.19.0
-          - "@typescript-eslint/eslint-plugin@5.30.5"
-          - "@typescript-eslint/parser@5.30.5"
-          - eslint-config-prettier@8.5.0
-          - eslint-plugin-solid@0.7.0
+          - eslint@8.32.0
+          - "@typescript-eslint/eslint-plugin@5.49.0"
+          - "@typescript-eslint/parser@5.49.0"
+          - "eslint-config-airbnb-typescript@17.0.0"
+          - "eslint-import-resolver-typescript@3.5.3"
+          - "eslint-plugin-import@2.27.5"

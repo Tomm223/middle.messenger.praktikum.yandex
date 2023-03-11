@@ -1,7 +1,6 @@
+import { SingController } from '@/service/sing.service'
 import Component from '@/core/Component'
 import { renderDOM } from '@/core/renderDOM'
-import Actions from '@/store/Actions'
-import Store from '@/store/Store'
 import { isEqual } from '@/utils/isEqual'
 
 class Route {
@@ -50,7 +49,7 @@ class Route {
 }
 
 class RouterInst {
-  __instance: any
+  static __instance: RouterInst
 
   routes: Route[]
 
@@ -61,9 +60,7 @@ class RouterInst {
   _rootQuery: string
 
   constructor(rootQuery: string) {
-    if (RouterInst.__instance) {
-      return RouterInst.__instance
-    }
+    if (RouterInst.__instance) return RouterInst.__instance
 
     this.routes = []
     this.history = window.history
@@ -81,27 +78,24 @@ class RouterInst {
     return this
   }
 
-  start() {
+  async start() {
     window.onpopstate = ((event: any) => {
-      this._onRoute(event.currentTarget.location.pathname)
+      this.go(event.currentTarget.location.pathname)
     }).bind(this)
 
-    this._onRoute(window.location.pathname)
+    await this.go(window.location.pathname)
   }
 
-  // _makeProxyOnRoute(fn: any) {
-  //   if (typeof fn !== 'function') throw new Error(`Rout dont can make proxy for ${fn} `)
-
-  // }
-
   async isValidUser() {
-    const isAuth = await Actions.authorizationUser()
+    const controller = new SingController()
+    const isAuth = await controller.authorizationUser()
     return isAuth
   }
 
   async isRedirected(pathname: string): Promise<boolean> {
     const isValidUser = await this.isValidUser()
     let isRedirect = false
+
     if (isValidUser) {
       if (pathname !== '/messenger' && pathname !== '/setting') {
         // return '/messenger'
@@ -131,9 +125,8 @@ class RouterInst {
 
       route = routeOfPath
     } else {
-      route = this.getRoute('/no-found') || this.getRoute('/error')
+      route = this.getRouteNoFound() || this.getRouteError()
     }
-
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave()
     }
@@ -142,9 +135,9 @@ class RouterInst {
     route.render(props)
   }
 
-  go(pathname: string, props?: Record<string, any>) {
+  async go(pathname: string, props?: Record<string, any>) {
     this.history.pushState({}, '', pathname)
-    this._onRoute(pathname, props)
+    await this._onRoute(pathname, props)
   }
 
   back() {
@@ -157,6 +150,26 @@ class RouterInst {
 
   getRoute(pathname: string) {
     return this.routes.find((route) => route.match(pathname))
+  }
+
+  getRouteNoFound() {
+    return this.routes.find((route) => route.match('/no-found')) as Route
+  }
+
+  getRouteError() {
+    return this.routes.find((route) => route.match('/error')) as Route
+  }
+
+  _unsubscribe() {
+    this.routes = []
+    this._currentRoute = null
+
+    const rootDiv = document.querySelector(this._rootQuery) as HTMLElement
+    rootDiv.innerHTML = ''
+    document.body.style.overflow = 'visible'
+    window.onpopstate = () => {}
+
+    this.history.pushState({}, '', '/')
   }
 }
 

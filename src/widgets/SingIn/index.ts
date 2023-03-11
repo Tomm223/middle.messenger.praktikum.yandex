@@ -1,4 +1,4 @@
-import { connect } from 'src/store/connect'
+import { connect } from '@/store/connect'
 import SingIn from './component'
 
 function map(state: any) {

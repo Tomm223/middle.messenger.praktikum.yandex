@@ -38,7 +38,9 @@ const authorizationUser = async () => {
     const api = new SingController()
 
     const user = await api.getUser()
-
+    if (user === null) {
+      throw new Error('')
+    }
     setUser(user)
     return true
   } catch {
@@ -48,7 +50,7 @@ const authorizationUser = async () => {
 }
 
 export type UserActType = {
-  authorizationUser: () => Promise<boolean>
+  // authorizationUser: () => Promise<boolean>
   getIsAuth: () => boolean
   setUser: (user: UserType) => void
   resetUser: () => void
@@ -57,7 +59,7 @@ export type UserActType = {
 }
 
 const userAct: UserActType = {
-  authorizationUser,
+  // authorizationUser,
   setIsAuth,
   resetUser,
   setUser,

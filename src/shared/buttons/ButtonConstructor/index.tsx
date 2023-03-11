@@ -1,5 +1,5 @@
 import Component from '@/core/Component'
-import CompileMaster from 'src/core/CompileJSX'
+import CompileMaster from '@/core/CompileJSX'
 import styles from './styles.module.scss'
 
 interface ButtonConstructorType {

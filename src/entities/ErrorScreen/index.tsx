@@ -2,7 +2,7 @@ import ButtonConstructor from '@/shared/buttons/ButtonConstructor'
 import CompileMaster from '@/core/CompileJSX'
 import styles from './styles.module.scss'
 import Component from '@/core/Component'
-import Router from 'src/app/router'
+import Router from '@/app/router'
 
 interface ErrorType {
   numberError: number | undefined | null

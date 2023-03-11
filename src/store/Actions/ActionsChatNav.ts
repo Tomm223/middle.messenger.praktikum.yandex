@@ -4,8 +4,6 @@ import Store from '../Store'
 
 const store = new Store()
 
-const api = new ChatsController()
-
 type ActionGetList = () => ChatList[] | []
 
 const getChatListOffset = () => {
@@ -18,6 +16,8 @@ const setChatListLimit = (limit: number) => {
 }
 
 const pushNewItemsChat = async () => {
+  const api = new ChatsController()
+
   const { limit, search } = store.getState().listChats
   const offset = getChatListOffset()
   await api.pushNewChats({
@@ -49,13 +49,18 @@ const getFilterChatList: ActionGetList = () => {
   const string = getChatListSearch()
   const list = getChatList()
 
-  if (!list.length) {
-    return []
-  }
+  // if (!list.length) {
+  //   return []
+  // }
   if (string === '') {
     return list
   }
-  return list.filter((item) => item.title.toLowerCase().includes(string.toLowerCase()))
+  if (list.length) {
+    const resp = list as ChatList[]
+    return resp.filter((item) => item.title.toLowerCase().includes(string.toLowerCase()))
+  } else {
+    return list
+  }
 }
 
 const setIsAllChatList = (bool: boolean) => {
@@ -78,6 +83,8 @@ const pushChatList: (list: ChatList[]) => void = (list) => {
 }
 
 const setNewChatList = async () => {
+  const api = new ChatsController()
+
   await api.getNewChatList({
     limit: getChatListLimit(),
     offset: 0,

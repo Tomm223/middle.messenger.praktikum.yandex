@@ -1,8 +1,8 @@
 import CompileMaster from '@/core/CompileJSX'
+import styles from './styles.module.scss'
+import Img from '@/static/icons/pics_profile.png'
 import Component from '@/core/Component'
 import { API_BASE_RESOURCES } from '@/http/index'
-import styles from './styles.module.scss'
-import Img from 'static/icons/pics_profile.png'
 
 interface AvatarType {
   link: string

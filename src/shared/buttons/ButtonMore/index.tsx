@@ -1,7 +1,7 @@
 import CompileMaster from '@/core/CompileJSX'
 import styles from './styles.module.scss'
-import Dots from 'static/icons/3dots.svg'
-import DotsBlue from 'static/icons/3dots_blue.svg'
+import Dots from '@/static/icons/3dots.svg'
+import DotsBlue from '@/static/icons/3dots_blue.svg'
 import Component from '@/core/Component'
 
 interface ButtonMoretype {

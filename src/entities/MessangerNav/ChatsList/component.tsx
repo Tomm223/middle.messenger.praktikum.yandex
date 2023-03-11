@@ -35,7 +35,10 @@ export default class ChatsList extends Component<ChatsUl> {
 
   protected init(): void {
     this.children.button = new ItemCreateChat({
-      onClick: () => this.setIsOpenModal.bind(this)(true),
+      onClick: () => {
+        const fn = this.setIsOpenModal.bind(this)
+        fn(true)
+      },
     })
 
     this.children.modal = new ModalFormDefault({
@@ -100,6 +103,7 @@ export default class ChatsList extends Component<ChatsUl> {
 
   saveScroll() {
     const top = this._element?.scrollTop
+    // console.log('save scroll = ', top)
 
     const oldScroll = this.props.scroll
     this.props.scroll = { ...oldScroll, top: Number(top) }
@@ -128,16 +132,16 @@ export default class ChatsList extends Component<ChatsUl> {
         },
       }).getContent()
     )
-
     // add to first btn createChat
     if (listItem) {
       listItem.unshift(this.childrenHTML.elements.button)
     }
-
     return listItem
   }
 
   protected componentDidUpdate(oldProps: ChatsUl, newProps: ChatsUl): void {
+    // console.log('didUpdate list', oldProps, newProps)
+
     this.correctingScroll()
   }
 
@@ -146,6 +150,8 @@ export default class ChatsList extends Component<ChatsUl> {
   }
 
   protected render(): HTMLElement {
+    // console.log('render')
+
     let listItem: Array<any>
 
     if (this.props.loading && !this.props.list.length) {

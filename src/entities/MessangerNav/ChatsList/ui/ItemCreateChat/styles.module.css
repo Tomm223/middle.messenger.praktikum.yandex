@@ -1,0 +1,25 @@
+.btn {
+  width: 100%;
+  border-top: 1px #eaeaea solid;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+  background-color: #f5f5f5;
+  transition: all 0.3;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #f1f1f1;
+}
+
+.content {
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.img {
+  margin-right: 10px;
+}/*# sourceMappingURL=styles.module.css.map */

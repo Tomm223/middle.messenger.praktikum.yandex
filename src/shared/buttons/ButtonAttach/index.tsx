@@ -1,6 +1,6 @@
 import CompileMaster from '@/core/CompileJSX'
 import styles from './styles.module.scss'
-import Attach from 'static/icons/attach.svg'
+import Attach from '@/static/icons/attach.svg'
 import Component from '@/core/Component'
 
 interface ButtonAttachType {

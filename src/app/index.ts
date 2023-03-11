@@ -3,13 +3,13 @@ import '@/styles/vars.scss'
 import '@/styles/reset.css'
 
 import Router from './router'
-import Nagivation from 'src/pages/Navigation'
-import Messanger from 'src/pages/Messenger'
-import ProfilePage from 'src/pages/ProfilePage'
-import SingInPage from 'src/pages/SingInPage'
-import SingUpPage from 'src/pages/SingUpPage'
-import NoFound from 'src/pages/NoFound'
-import ServerError from 'src/pages/ServerError'
+import Nagivation from '@/pages/Navigation'
+import Messanger from '@/pages/Messenger'
+import ProfilePage from '@/pages/ProfilePage'
+import SingInPage from '@/pages/SingInPage'
+import SingUpPage from '@/pages/SingUpPage'
+import NoFound from '@/pages/NoFound'
+import ServerError from '@/pages/ServerError'
 
 Router.use('/', Nagivation)
   .use('/messenger', Messanger)

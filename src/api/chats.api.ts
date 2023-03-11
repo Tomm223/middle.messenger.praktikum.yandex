@@ -5,6 +5,12 @@ import { getBoolOfStatusCode } from './helpers/getBoolOfStatusCode'
 const ChatHTTP = HTTP('/chats')
 
 export class ChatAPI {
+  constructor(mockResolve?: unknown) {
+    if (mockResolve) {
+      ChatHTTP.mockResolve(mockResolve)
+    }
+  }
+
   getChatById(id: number) {
     return ChatHTTP.get(`/${id}`).then((resp) => JSON.parse(resp.response))
   }

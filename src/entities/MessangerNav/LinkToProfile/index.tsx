@@ -2,7 +2,7 @@ import CompileMaster from '@/core/CompileJSX'
 import styles from './styles.module.scss'
 import Polygon1 from '@/static/icons/Polygon1.svg'
 import Component from '@/core/Component'
-import Router from 'src/app/router'
+import Router from '@/app/router'
 
 interface LinkToProfileType {
   onClick?: () => void

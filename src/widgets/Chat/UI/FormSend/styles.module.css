@@ -30,15 +30,7 @@
   position: absolute;
   transition: all 1s ease-out;
   padding-bottom: 10px;
-}
-
-@-webkit-keyframes menu {
-  from {
-    transform: translate(0%, 300%);
-  }
-  to {
-    transform: translate(0%, -100%);
-  }
+  left: 10px;
 }
 
 @keyframes menu {
@@ -49,25 +41,18 @@
     transform: translate(0%, -100%);
   }
 }
-
 .menu_active {
   opacity: 1;
   top: 0;
-  left: -10px;
-  -webkit-animation-name: menu;
   animation-name: menu;
-  -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
-  -webkit-animation-duration: 200ms, 500ms;
   animation-duration: 200ms, 500ms;
-  -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
 
 .menu {
+  opacity: 0;
   width: 0;
   height: 0;
   transform: translate(0%, 100%);
-  bottom: 1000px;
-  left: -10px;
-} /*# sourceMappingURL=styles.module.css.map */
+}/*# sourceMappingURL=styles.module.css.map */

@@ -3,7 +3,6 @@ import styles from './styles.module.scss'
 import Component from '@/core/Component'
 import ButtonSearch from './UI/button'
 import InputSearch from './UI/input'
-import { EventBus } from '@/core/EventBus'
 import { EVENTS, SearchEventBus } from './eventbus'
 import { debounce } from '@/utils/debounce'
 
@@ -58,9 +57,7 @@ export default class Search extends Component<SearchType> {
     }
   }
 
-  protected registerEvents(
-    eventBus: EventBus<Record<string, string>, Record<string, any[]>>
-  ): void {
+  protected registerEvents(): void {
     SearchEventBus.on(EVENTS.VISIBLE, this.onFocus.bind(this))
     SearchEventBus.on(EVENTS.INPUT_ON_CHANGE, this.onInputChange.bind(this))
   }

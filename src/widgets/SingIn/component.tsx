@@ -1,13 +1,16 @@
-import CompileMaster from '../../core/CompileJSX'
+import CompileMaster from '@/core/CompileJSX'
 import InputText from '@/shared/inputs/InputText'
 import ButtonConstructor from '@/shared/buttons/ButtonConstructor'
 import ModalDefault from '@/shared/modals/ModalDefault'
 import Component from '@/core/Component'
 import { ValidateSingIn } from './constants'
 import FormConstructorTitle from '@/shared/form/FormConstructorTitle'
-import Router from 'src/app/router'
+import Router from '@/app/router'
 import { SingInRequest } from '@/types/user'
 import LoaderFullPage from '@/shared/Loaders/LoaderFullPage'
+import SingUnPage from '@/pages/SingUpPage'
+import Nagivation from '@/pages/Navigation'
+import SingInPage from '@/pages/SingInPage'
 
 interface SingInType {
   size: Size

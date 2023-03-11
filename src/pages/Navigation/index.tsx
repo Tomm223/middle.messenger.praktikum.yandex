@@ -1,6 +1,6 @@
 import Component from '@/core/Component'
 import CompileMaster from '@/core/CompileJSX'
-import Router from 'src/app/router'
+import Router from '@/app/router'
 
 export default class Nagivation extends Component {
   handleHref(e: MouseEvent) {

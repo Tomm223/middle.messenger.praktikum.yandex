@@ -1,3 +1,80 @@
+.overflow {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+.overflow::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background-color: inherit;
+}
+
 .list {
   padding-bottom: 14px;
 }
+
+.item {
+  width: 100%;
+  border-top: 1px #eaeaea solid;
+  height: 71px;
+}
+.item:last-child {
+  border-bottom: 1px #eaeaea solid;
+}
+
+.link {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  padding: 12px 10px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 47px 1fr 30px;
+}
+.link:hover {
+  background-color: #e4edfd;
+}
+
+.unread {
+  display: flex;
+  align-items: flex-end;
+}
+
+.body {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  margin-right: 7px;
+  gap: 5px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 30px;
+}
+.body__title {
+  font-weight: 600;
+}
+.body__content {
+  font-size: 12px;
+  line-height: 15px;
+  max-height: 30px;
+  overflow: hidden;
+}
+
+.right {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 30px;
+}
+
+.last {
+  width: 100%;
+  height: 20px;
+}
+
+.last {
+  width: 100%;
+  height: 60px;
+}/*# sourceMappingURL=styles.module.css.map */
